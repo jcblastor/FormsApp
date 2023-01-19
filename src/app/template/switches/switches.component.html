@@ -1,1 +1,119 @@
-<p>switches works!</p>
+<h2>Template: Switches</h2>
+<hr />
+
+<form #miFormulario="ngForm">
+  <!-- Radio -->
+  <div class="mb-3 row">
+    <label class="col-sm-3">Género</label>
+
+    <div class="col-sm-9">
+
+      <div class="form-check">
+        <label class="form-check-label" for="radioMasculino">
+          Masculino
+        </label>
+        <input
+          type="radio"
+          name="radioGenero"
+          id="radioMasculino"
+          class="form-check-input"
+          value="M"
+          [(ngModel)]="persona.genero"
+          required
+        />
+      </div>
+
+      <div class="form-check">
+        <label class="form-check-label" for="radioFemenino">
+          Femenino
+        </label>
+        <input
+          type="radio"
+          name="radioGenero"
+          id="radioFemenino"
+          class="form-check-input"
+          value="F"
+          [(ngModel)]="persona.genero"
+          required
+        />
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Switch -->
+  <div class="mb-3 row">
+    <label class="col-sm-3">Notificaciones</label>
+
+    <div class="col-sm-9">
+
+      <div class="form-check form-switch">
+        <label class="form-check-label" for="flexSwitchCheckChecked">Quiero recibir notificaciones</label>
+        <input
+          type="checkbox"
+          role="switch"
+          class="form-check-input"
+          id="flexSwitchCheckChecked"
+          [(ngModel)]="persona.notificaciones"
+          name="notificaiones"
+        />
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Check -->
+  <div class="mb-3 row">
+    <label class="col-sm-3"></label>
+
+    <div class="col-sm-9">
+
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault">
+          Terminós y condiciones de uso.
+        </label>
+        <input
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+          class="form-check-input"
+          [(ngModel)]="terminosYCondiciones"
+          name="terminos"
+          required
+        />
+        <br>
+        <span
+          class="text-form text-danger"
+          *ngIf="miFormulario.controls['terminos']?.errors && miFormulario.controls['terminos']?.touched"
+        >
+          Tiene que aceptar los terminos.
+        </span>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <button
+        class="btn btn-primary float-end"
+        [disabled]="miFormulario.invalid"
+      >
+
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<h5>Valor del Formulario</h5>
+<pre> {{ miFormulario.value | json }} </pre>
+
+<h5>Valid</h5>
+<pre> {{ miFormulario.valid | json }} </pre>
+
+<h5>Persona</h5>
+<pre> {{ persona | json }} </pre>
