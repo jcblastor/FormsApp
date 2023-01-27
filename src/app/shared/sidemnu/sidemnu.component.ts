@@ -19,11 +19,16 @@ export class SidemnuComponent {
     { texto: 'Básicos', ruta: './template/basicos' },
     { texto: 'Dinámicos', ruta: './template/dinamicos' },
     { texto: 'Switches', ruta: './template/switches' },
-  ]
+  ];
 
   reactiveMenu: MenuItem[] = [
     { texto: 'Básicos', ruta: './reactive/basicos' },
     { texto: 'Dinámicos', ruta: './reactive/dinamicos' },
     { texto: 'Switches', ruta: './reactive/switches' },
+  ];
+
+  authMenu: MenuItem[] = [
+    { texto: 'Login', ruta: './auth/login' },
+    { texto: 'Register', ruta: './auth/register' },
   ]
 }
