@@ -47,8 +47,31 @@
             class="form-text text-danger"
             *ngIf="isValid('email')"
           >
-            Debe de ser un correo electronico valido
+            {{ emailErrorMsg }}
           </span>
+
+          <!-- Esto es mucha logica, y los formularios reactivos se
+            basan en que nuestro html quede limpio.
+          <span
+            class="form-text text-danger"
+            *ngIf="isEmailValid()"
+          >
+            El correo electronico es obligatorio
+          </span>
+
+          <span
+            class="form-text text-danger"
+            *ngIf="isFormatEmailValid()"
+          >
+            El correo no tiene un formato valido
+          </span>
+
+          <span
+            class="form-text text-danger"
+            *ngIf="existEmail()"
+          >
+            El correo ya esta en uso.
+          </span> -->
         </div>
       </div>
 
@@ -120,6 +143,7 @@
           <button
             type="submit"
             class="btn btn-primary float-end"
+            [disabled]="miFormulario.pending"
           >Crear</button>
         </div>
       </div>
@@ -128,10 +152,21 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col">
+    <span>Status</span>
+    <pre> {{ miFormulario.status }} </pre>
 
-<pre>Form Valid: {{ miFormulario.valid }}</pre>
-<pre> {{miFormulario.controls['nombre'].errors | json }} </pre>
+    <span>Pending</span>
+    <pre> {{ miFormulario.get('email')?.errors | json }} </pre>
 
-<br>
-<span>form</span>
-<pre> {{ miFormulario.value | json }} </pre>
+    <pre> {{ miFormulario.get('email')?.errors?.['patter'] | json }} </pre>
+
+    <pre>Form Valid: {{ miFormulario.valid }}</pre>
+    <pre> {{miFormulario.controls['nombre'].errors | json }} </pre>
+
+    <br>
+    <span>form</span>
+    <pre> {{ miFormulario.value | json }} </pre>
+  </div>
+</div>

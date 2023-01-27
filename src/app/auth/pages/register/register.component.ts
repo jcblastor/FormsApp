@@ -29,7 +29,22 @@ export class RegisterComponent implements OnInit {
     // con validaciones globales
   }, {
     validators: [this.vs.camposIguales('password', 'password2')]
-  })
+  });
+
+  get emailErrorMsg(): string {
+    const errors = this.miFormulario.get('email')?.errors;
+
+    if (errors?.['required'])
+      return 'El correo electronico es obligatorio.';
+
+    if (errors?.['pattern'])
+      return 'El correo electronico no tiene un formato valido.';
+
+    if (errors?.['existeEmail'])
+      return 'El correo electronico ya esta en uso.';
+
+    return '';
+  }
 
   constructor(
     private readonly fb: FormBuilder,
@@ -41,12 +56,26 @@ export class RegisterComponent implements OnInit {
     this.miFormulario.reset({
       nombre: 'Carlos Guzman',
       email: 'test1@test.com',
-      username: 'jcblastor'
+      username: 'jcblastor',
+      password: '123456',
+      password2: '123456',
     });
   }
 
   isValid(campo: string): boolean | undefined {
     return this.miFormulario.get(campo)?.invalid && this.miFormulario.get(campo)?.touched;
+  }
+
+  isEmailValid() {
+    return this.miFormulario.get('email')?.errors?.['required'] && this.miFormulario.get('email')?.touched;
+  }
+
+  isFormatEmailValid() {
+    return this.miFormulario.get('email')?.errors?.['pattern'] && this.miFormulario.get('email')?.touched;
+  }
+
+  existEmail() {
+    return this.miFormulario.get('email')?.errors?.['existeEmail'] && this.miFormulario.get('email')?.touched;
   }
 
   submitForm() {
